@@ -15,6 +15,10 @@
             <p>{{ event.description }}</p>
             <div class="detail-actions">
                 <a href="{% url 'events:event_list' %}" class="feature-link">← Назад к событиям</a>
+                <form method="post" action="{% url 'events:event_delete' event.pk %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn red darken-1">Удалить событие</button>
+                </form>
             </div>
         </article>
     </div>
