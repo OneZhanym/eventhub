@@ -16,6 +16,19 @@
         <div class="nav-wrapper container">
             <a href="{% url 'events:home' %}" class="brand-logo brand-mark">EventHub</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
+                {% if user.is_authenticated %}
+                    <li><a href="#!">{{ user.username }}</a></li>
+                    <li>
+                        <form method="post" action="{% url 'accounts:logout' %}" class="nav-form">
+                            {% csrf_token %}
+                            <button type="submit" class="nav-button">Выйти</button>
+                        </form>
+                    </li>
+                {% else %}
+                    <li><a href="{% url 'accounts:login' %}">Вход</a></li>
+                    <li><a href="{% url 'accounts:signup' %}">Регистрация</a></li>
+                {% endif %}
+            </ul>
            
         </div> 
     </nav>

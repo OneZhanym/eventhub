@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}EventHub | Вход{% endblock %}
+
+{% block content %}
+<section class="page-shell">
+    <div class="container">
+        <div class="page-header">
+            <span class="eyebrow">Authentication</span>
+            <h1>Вход в EventHub</h1>
+        </div>
+        <form method="post" class="detail-card form-shell auth-shell">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="form-row">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% for error in field.errors %}
+                        <p class="form-error">{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+            <button type="submit" class="btn-large amber darken-2">Войти</button>
+            <p>Нет аккаунта? <a href="{% url 'signup' %}" class="feature-link">Зарегистрироваться</a></p>
+        </form>
+    </div>
+</section>
+{% endblock %}
