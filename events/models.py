@@ -1,6 +1,12 @@
 from django.db import models
+from django.conf import settings
 
 class Event(models.Model):
+    owner = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="events",
+    )
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=220, unique=True)
     summary = models.CharField(max_length=240)
