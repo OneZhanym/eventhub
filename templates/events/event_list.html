@@ -8,10 +8,10 @@
         <div class="page-header">
             <span class="eyebrow">Event Catalog</span>
             <h1>Список событий</h1>
-            <p>Пока это демонстрационный список, а на следующих занятиях мы свяжем его с моделями и базой данных.</p>
+            {% if user.is_authenticated %}
+                <a href="{% url 'events:event_create' %}" class="btn amber darken-2">Создать событие</a>
+            {% endif %}
         </div>
-   
-    
         <div class="row">
             {% for event in events %}
                 <div class="col s12 m6 l4">
@@ -23,6 +23,9 @@
                         <p class="event-date">{{ event.starts_at|date:"d E Y, H:i" }}</p>
                         <p>{{ event.summary }}</p>
                         <a href="{% url 'events:event_detail' event.pk %}" class="feature-link">Открыть карточку</a>
+                        {% if perms.events.change_event %}
+                            <a href="{% url 'events:event_update' event.pk %}" class="btn amber darken-2">Изменить</a>
+                        {% endif %}
                     </article>
                 </div>
             {% empty %}

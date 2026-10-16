@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}EventHub | Регистрация{% endblock %}
+
+{% block content %}
+<section class="page-shell">
+    <div class="container">
+        <div class="page-header">
+            <span class="eyebrow">Authentication</span>
+            <h1>Регистрация</h1>
+        </div>
+        <form method="post" class="detail-card form-shell auth-shell">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="form-row">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.help_text %}
+                        <small>{{ field.help_text|safe }}</small>
+                    {% endif %}
+                    {% for error in field.errors %}
+                        <p class="form-error">{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+            <button type="submit" class="btn-large amber darken-2">Создать аккаунт</button>
+            <p>Уже есть аккаунт? <a href="{% url 'accounts:login' %}" class="feature-link">Войти</a></p>
+        </form>
+    </div>
+</section>
+{% endblock %}

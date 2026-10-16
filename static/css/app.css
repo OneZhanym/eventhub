@@ -1,34 +1,85 @@
 :root {
-    --bg: #f6f1e8;
-    --paper: #fffaf2;
-    --ink: #1f1b16;
-    --muted: #6d6256;
-    --line: rgba(31, 27, 22, 0.08);
-    --accent: #d18622;
-    --accent-deep: #9c4d0e;
+    --bg: #f4f7f3;
+    --paper: #ffffff;
+    --ink: #172820;
+    --muted: #586960;
+    --line: #dce5dd;
+    --accent: #c45c36;
+    --accent-deep: #174638;
 }
 
 body {
     background:
-        radial-gradient(circle at top right, rgba(209, 134, 34, 0.18), transparent 30%),
-        linear-gradient(180deg, #f4eee2 0%, #f9f5ee 52%, #fffdf9 100%);
+        linear-gradient(180deg, #eef4ee 0%, #f8faf7 38rem, #ffffff 100%);
     color: var(--ink);
     font-family: "Manrope", sans-serif;
+    min-height: 100vh;
 }
 
 .nav-shell {
     background: rgba(255, 250, 242, 0.86);
     box-shadow: none;
+    height: auto;
+    line-height: normal;
 }
 
 .nav-shell .nav-wrapper {
     border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    height: auto;
+    min-height: 64px;
+    line-height: normal;
+}
+
+.nav-shell .nav-wrapper .brand-logo {
+    display: block;
+    position: static;
+    transform: none;
+    left: auto;
+    font-size: 1.65rem;
+    line-height: 1.2;
+}
+
+.nav-actions,
+.nav-links {
+    display: flex;
+    align-items: center;
+}
+
+.nav-actions {
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    margin-left: auto;
+}
+
+.nav-links {
+    margin: 0;
+    gap: 0.2rem;
+    list-style: none;
+}
+
+.nav-links li {
+    float: none;
+}
+
+.nav-user {
+    display: block;
+    color: var(--accent-deep);
+    font-weight: 800;
+    background: #e4eee5;
+    border-radius: 6px;
+    padding: 0.55rem 0.8rem;
+    white-space: nowrap;
 }
 
 .brand-mark {
     color: var(--accent-deep) !important;
     font-weight: 800;
-    letter-spacing: -0.04em;
+    letter-spacing: 0;
 }
 
 .nav-shell a {
@@ -39,13 +90,24 @@ body {
     margin: 0;
 }
 
+.nav-links a,
 .nav-button {
-    background: none;
+    background: transparent;
     border: 0;
     color: var(--ink);
     cursor: pointer;
-    height: 64px;
-    padding: 0 15px;
+    display: block;
+    font: inherit;
+    line-height: 44px;
+    padding: 0 0.8rem;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.nav-links a:hover,
+.nav-button:hover {
+    background: #e7efe8;
+    border-radius: 6px;
 }
 
 .hero-shell,
@@ -56,6 +118,7 @@ body {
 .hero-grid {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     margin-bottom: 2rem;
 }
 
@@ -72,11 +135,18 @@ body {
 
 .hero-title,
 .page-header h1 {
-    font-size: clamp(2.4rem, 5vw, 4.8rem);
     font-weight: 800;
-    letter-spacing: -0.06em;
-    line-height: 0.98;
+    letter-spacing: 0;
+    line-height: 1.08;
     margin: 0.6rem 0 1rem;
+}
+
+.hero-title {
+    font-size: 4rem;
+}
+
+.page-header h1 {
+    font-size: 3rem;
 }
 
 .hero-copy,
@@ -103,9 +173,9 @@ body {
 .feature-card,
 .event-card,
 .detail-card {
-    background: rgba(255, 250, 242, 0.88);
+    background: var(--paper);
     border: 1px solid var(--line);
-    border-radius: 28px;
+    border-radius: 8px;
     padding: 1.75rem;
 }
 
@@ -121,11 +191,14 @@ body {
 
 .detail-card {
     max-width: 52rem;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .event-poster,
 .detail-poster {
-    border-radius: 20px;
+    border-radius: 6px;
     display: block;
     margin-bottom: 1rem;
     width: 100%;
@@ -169,17 +242,54 @@ body {
     gap: 0.4rem;
 }
 
+.form-row label {
+    color: var(--ink) !important;
+    font-size: 0.95rem !important;
+    font-weight: 700;
+    height: auto;
+    opacity: 1 !important;
+    position: static !important;
+    transform: none !important;
+}
+
 .form-row input,
 .form-row select,
 .form-row textarea {
-    background: rgba(255, 255, 255, 0.72);
-    border: 1px solid var(--line);
-    border-radius: 16px;
+    appearance: none;
+    background: #fff;
+    border: 1px solid var(--line) !important;
+    border-radius: 6px;
+    box-shadow: none !important;
+    box-sizing: border-box;
+    color: var(--ink);
+    font: inherit;
+    height: auto !important;
+    margin: 0 !important;
     padding: 0.9rem 1rem;
+    width: 100%;
+}
+
+.form-row input[type="checkbox"],
+.form-row input[type="radio"] {
+    appearance: auto;
+    width: auto;
+}
+
+.form-row input[type="file"] {
+    padding: 0.65rem;
+}
+
+.form-row input:focus,
+.form-row select:focus,
+.form-row textarea:focus {
+    border-color: var(--accent-deep) !important;
+    box-shadow: 0 0 0 2px rgba(23, 70, 56, 0.12) !important;
+    outline: none;
 }
 
 .form-row textarea {
     min-height: 8rem;
+    resize: vertical;
 }
 
 .form-error {
@@ -204,13 +314,90 @@ body {
     margin-top: 1.5rem;
 }
 
+.detail-actions form {
+    margin: 0;
+}
+
+.btn.amber,
+.btn-large.amber {
+    background-color: var(--accent) !important;
+}
+
+.btn.amber:hover,
+.btn-large.amber:hover {
+    background-color: #a94728 !important;
+}
+
+.btn-large,
+.btn {
+    border-radius: 6px;
+    box-shadow: none;
+    font-weight: 700;
+    text-transform: none;
+}
+
 .auth-shell {
     max-width: 32rem;
 }
 
 @media only screen and (max-width: 992px) {
-    .brand-logo {
-        position: static;
-        transform: none;
+    .nav-shell .nav-wrapper.container {
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .nav-actions {
+        justify-content: center;
+        flex-wrap: wrap;
+        margin: 0;
+        width: 100%;
+    }
+
+    .nav-links {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .nav-button {
+        padding: 0 0.65rem;
+    }
+
+    .hero-grid > .col {
+        flex: 0 0 100%;
+        max-width: 100%;
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .hero-shell,
+    .page-shell {
+        padding: 2.5rem 0 3rem;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .page-header h1 {
+        font-size: 2.15rem;
+    }
+
+    .hero-panel,
+    .feature-card,
+    .event-card,
+    .detail-card {
+        padding: 1.25rem;
+    }
+
+    .hero-actions .btn-large {
+        flex: 1 1 9rem;
+        text-align: center;
+    }
+
+    .nav-links a,
+    .nav-button {
+        padding: 0 0.55rem;
     }
 }
