@@ -16,6 +16,8 @@
             {% for event in events %}
                 <div class="col s12 m6 l4">
                     <article class="event-card">
+                        <p>{{event.pk}}</p>
+                        <p>{{event.owner}}</p>
                         {% if event.poster %}
                             <img src="{{ event.poster.url }}" alt="{{ event.title }}" class="event-poster">
                         {% endif %}
