@@ -17,11 +17,12 @@
             <a href="{% url 'events:home' %}" class="brand-logo brand-mark">EventHub</a>
             <div class="nav-actions">
                 {% if user.is_authenticated %}
-                    <span class="nav-user">{{ user.username }}</span>
+                    <a href="{% url 'accounts:profile' %}" class="nav-user">{{ user.username }}</a>
                 {% endif %}
                 <ul id="nav-mobile" class="nav-links">
                     <li><a href="{% url 'events:event_list' %}">Все события</a></li>
                     {% if user.is_authenticated %}
+                        <li><a href="{% url 'accounts:profile' %}">Мой профиль</a></li>
                         <li><a href="{% url 'events:event_create' %}">Создать событие</a></li>
                         <li>
                             <form method="post" action="{% url 'accounts:logout' %}" class="nav-form">
@@ -38,6 +39,13 @@
         </div>
     </nav>
     <main>
+        {% if messages %}
+            <div class="container messages" aria-live="polite">
+                {% for message in messages %}
+                    <div class="card-panel message-{{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
         {% block content %}{% endblock %}
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
