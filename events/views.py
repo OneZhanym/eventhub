@@ -2,7 +2,6 @@ from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views import View
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Event
 from .forms import EventForm
 
@@ -30,7 +29,6 @@ class EventDetailView(DetailView):
         return Event.objects.filter(is_deleted=False)
 
 
-<<<<<<< HEAD
 class EventSoftDeleteView(LoginRequiredMixin, View):
     login_url = "accounts:login"
 
@@ -41,12 +39,6 @@ class EventSoftDeleteView(LoginRequiredMixin, View):
         event = get_object_or_404(events, pk=pk)
         event.soft_delete()
         return redirect("events:event_list")
-=======
-class OwnerRequiredMixin(UserPassesTestMixin):
-
-    def test_func(self):
-        return self.get_object().owner == self.request.user
->>>>>>> upstream/main
 
 
 class EventCreateView(LoginRequiredMixin, CreateView):
@@ -59,12 +51,8 @@ class EventCreateView(LoginRequiredMixin, CreateView):
         form.instance.owner = self.request.user
         return super().form_valid(form)
 
-<<<<<<< HEAD
 
 class EventUpdateView(PermissionRequiredMixin, UpdateView):
-=======
-class EventUpdateView(LoginRequiredMixin, OwnerRequiredMixin, UpdateView):
->>>>>>> upstream/main
     model = Event
     form_class = EventForm
     template_name = "events/event_form.html"
